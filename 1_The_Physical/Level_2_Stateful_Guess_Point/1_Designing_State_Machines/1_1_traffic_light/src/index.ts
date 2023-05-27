@@ -2,9 +2,13 @@ export class TrafficLight {
   private isOn: boolean;
   private currentColor: "GREEN" | "YELLOW" | "RED" | null;
 
-  constructor() {
+  private constructor() {
     this.isOn = false;
     this.currentColor = null;
+  }
+
+  public static create(): TrafficLight {
+    return new TrafficLight();
   }
 
   public isSwitchedOn() {
