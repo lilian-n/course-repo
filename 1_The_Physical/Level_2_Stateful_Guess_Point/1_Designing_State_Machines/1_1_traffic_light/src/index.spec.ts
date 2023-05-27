@@ -38,4 +38,11 @@ describe("traffic light", () => {
 
     expect(trafficLight.getCurrentColor()).toBe("GREEN");
   });
+
+  it("can be turned off, with no color shown", () => {
+    trafficLight.switchOff();
+
+    expect(trafficLight.isSwitchedOn()).toBeFalsy();
+    expect(trafficLight.getCurrentColor()).toBeNull();
+  });
 });
