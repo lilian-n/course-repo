@@ -24,4 +24,8 @@ export class TrafficLight {
     this.isOn = true;
     this.currentColor = "GREEN";
   }
+
+  public changeColor(): void {
+    this.currentColor = "YELLOW";
+  }
 }

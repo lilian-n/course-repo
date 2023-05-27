@@ -19,4 +19,15 @@ describe("traffic light", () => {
     expect(trafficLight.isSwitchedOn()).toBeTruthy();
     expect(trafficLight.getCurrentColor()).toBe("GREEN");
   });
+
+  it("when on, changes color from green to yellow'", () => {
+    const trafficLight = TrafficLight.create();
+    trafficLight.switchOn();
+
+    expect(trafficLight.getCurrentColor()).toBe("GREEN");
+    // Act
+    trafficLight.changeColor();
+
+    expect(trafficLight.getCurrentColor()).toBe("YELLOW");
+  });
 });
