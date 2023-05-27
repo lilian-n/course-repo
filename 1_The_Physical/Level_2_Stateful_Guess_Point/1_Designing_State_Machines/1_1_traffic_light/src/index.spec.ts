@@ -15,7 +15,7 @@ describe("traffic light", () => {
     expect(trafficLight.getCurrentColor()).toBe("GREEN");
   });
 
-  it("when on, changes color from green to yellow'", () => {
+  it("when on and color is green, changes color to yellow'", () => {
     expect(trafficLight.getCurrentColor()).toBe("GREEN");
 
     trafficLight.changeColor();
