@@ -1,6 +1,7 @@
+type LightColors = "GREEN" | "YELLOW" | "RED" | null;
 export class TrafficLight {
   private isOn: boolean;
-  private currentColor: "GREEN" | "YELLOW" | "RED" | null;
+  private currentColor: LightColors;
 
   private constructor() {
     this.isOn = false;
@@ -11,11 +12,16 @@ export class TrafficLight {
     return new TrafficLight();
   }
 
-  public isSwitchedOn() {
+  public isSwitchedOn(): boolean {
     return this.isOn;
   }
 
-  public getCurrentColor() {
+  public getCurrentColor(): LightColors {
     return this.currentColor;
+  }
+
+  public switchOn(): void {
+    this.isOn = true;
+    this.currentColor = "GREEN";
   }
 }
