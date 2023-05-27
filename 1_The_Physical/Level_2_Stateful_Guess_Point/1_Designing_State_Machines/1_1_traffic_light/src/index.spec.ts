@@ -18,7 +18,7 @@ describe("traffic light", () => {
   it("when on and color is green, changes color to yellow'", () => {
     expect(trafficLight.getCurrentColor()).toBe("GREEN");
 
-    trafficLight.changeColor();
+    trafficLight.turnYellow();
 
     expect(trafficLight.getCurrentColor()).toBe("YELLOW");
   });
@@ -26,7 +26,7 @@ describe("traffic light", () => {
   it("when on and color is yellow, changes color to red", () => {
     expect(trafficLight.getCurrentColor()).toBe("YELLOW");
 
-    trafficLight.changeColor();
+    trafficLight.turnRed();
 
     expect(trafficLight.getCurrentColor()).toBe("RED");
   });
@@ -34,7 +34,7 @@ describe("traffic light", () => {
   it("when on and color is red, changes color to green", () => {
     expect(trafficLight.getCurrentColor()).toBe("RED");
 
-    trafficLight.changeColor();
+    trafficLight.turnGreen();
 
     expect(trafficLight.getCurrentColor()).toBe("GREEN");
   });

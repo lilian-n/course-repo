@@ -30,20 +30,15 @@ export class TrafficLight {
     this.currentColor = null;
   }
 
-  public changeColor(): void {
-    if (this.getCurrentColor() === "GREEN") {
-      this.currentColor = "YELLOW";
-      return;
-    }
+  public turnGreen() {
+    this.currentColor = "GREEN";
+  }
 
-    if (this.getCurrentColor() === "YELLOW") {
-      this.currentColor = "RED";
-      return;
-    }
+  public turnYellow() {
+    this.currentColor = "YELLOW";
+  }
 
-    if (this.getCurrentColor() === "RED") {
-      this.currentColor = "GREEN";
-      return;
-    }
+  public turnRed() {
+    this.currentColor = "RED";
   }
 }
