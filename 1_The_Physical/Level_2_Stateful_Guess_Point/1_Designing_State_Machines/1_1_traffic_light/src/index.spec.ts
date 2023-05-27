@@ -45,4 +45,28 @@ describe("traffic light", () => {
     expect(trafficLight.isSwitchedOn()).toBeFalsy();
     expect(trafficLight.getCurrentColor()).toBeNull();
   });
+
+  it("can be turned off right after being turned on", () => {
+    trafficLight.switchOn();
+    trafficLight.switchOff();
+
+    expect(trafficLight.isSwitchedOn()).toBeFalsy();
+  });
+
+  it("can be turned off when the color is yellow", () => {
+    trafficLight.switchOn();
+    trafficLight.turnYellow();
+    trafficLight.switchOff();
+
+    expect(trafficLight.isSwitchedOn()).toBeFalsy();
+  });
+
+  it("can be turned off when the color is red", () => {
+    trafficLight.switchOn();
+    trafficLight.turnYellow();
+    trafficLight.turnRed();
+    trafficLight.switchOff();
+
+    expect(trafficLight.isSwitchedOn()).toBeFalsy();
+  });
 });
