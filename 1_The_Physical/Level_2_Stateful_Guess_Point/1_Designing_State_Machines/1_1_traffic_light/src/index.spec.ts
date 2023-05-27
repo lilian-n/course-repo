@@ -22,4 +22,12 @@ describe("traffic light", () => {
 
     expect(trafficLight.getCurrentColor()).toBe("YELLOW");
   });
+
+  it("when on and color is yellow, changes color to red", () => {
+    expect(trafficLight.getCurrentColor()).toBe("YELLOW");
+
+    trafficLight.changeColor();
+
+    expect(trafficLight.getCurrentColor()).toBe("RED");
+  });
 });
