@@ -35,5 +35,10 @@ export class TrafficLight {
       this.currentColor = "RED";
       return;
     }
+
+    if (this.getCurrentColor() === "RED") {
+      this.currentColor = "GREEN";
+      return;
+    }
   }
 }
