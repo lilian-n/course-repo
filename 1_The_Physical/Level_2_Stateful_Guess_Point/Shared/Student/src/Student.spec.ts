@@ -12,4 +12,10 @@ describe("Student", () => {
   it("fails to be created when the first name is over 10 characters", () => {
     expect(() => Student.create("Bettyyyyyyy", "Boop")).toThrowError();
   });
+
+  it("succeeds in being created when the first name is 5 characters, between 2 and 10 characters", () => {
+    const student = Student.create("Betty", "Boop");
+
+    expect(student.getFirstName()).toBe("Betty");
+  });
 });
