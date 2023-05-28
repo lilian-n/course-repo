@@ -47,5 +47,10 @@ describe("Student", () => {
 
       expect(student.getEmail()).toBeDefined();
     });
+
+    it("should define their email as all lowercase characters", () => {
+      const student = Student.create("Betty", "Boop");
+      expect(student.getEmail()).toBe("boopbe@essentialist.dev");
+    });
   });
 });
