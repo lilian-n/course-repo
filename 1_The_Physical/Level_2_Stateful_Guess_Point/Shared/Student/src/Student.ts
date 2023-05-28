@@ -11,18 +11,28 @@ export class Student {
     firstName: string | null,
     lastName: string | null
   ): Student {
-    if (!firstName) {
-      throw new Error("You must give a first name");
-    }
+    const validatedFirstName = this.validateFirstName(firstName);
 
     if (!lastName) {
       throw new Error("You must give a last name");
     }
 
-    return new Student(firstName, lastName);
+    return new Student(validatedFirstName, lastName);
   }
 
   public getFirstName() {
     return this.firstName;
+  }
+
+  private static validateFirstName(firstName: string | null): string {
+    if (!firstName) {
+      throw new Error("You must give a first name");
+    }
+
+    if (firstName.length < 2) {
+      throw new Error("Your first name must have at least 2 characters");
+    }
+
+    return firstName;
   }
 }
