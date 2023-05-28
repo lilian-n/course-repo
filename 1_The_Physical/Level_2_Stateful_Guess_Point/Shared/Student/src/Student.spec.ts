@@ -33,5 +33,11 @@ describe("Student", () => {
     it("fails to be created when the last name is over 15 characters", () => {
       expect(() => Student.create("Betty", "Booppppppppppppp")).toThrowError();
     });
+
+    it("succeeds in being created when the last name is 4 characters, between 2 - 15 characters", () => {
+      const student = Student.create("Betty", "Boop");
+
+      expect(student.getLastName()).toBe("Boop");
+    });
   });
 });

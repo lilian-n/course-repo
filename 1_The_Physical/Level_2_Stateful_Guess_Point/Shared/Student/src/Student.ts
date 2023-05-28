@@ -21,6 +21,10 @@ export class Student {
     return this.firstName;
   }
 
+  public getLastName() {
+    return this.lastName;
+  }
+
   private static validateFirstName(firstName: string | null): string {
     if (!firstName) {
       throw new Error("You must give a first name");
