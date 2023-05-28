@@ -52,5 +52,13 @@ describe("Student", () => {
       const student = Student.create("Betty", "Boop");
       expect(student.getEmail()).toBe("boopbe@essentialist.dev");
     });
+
+    it("should define their email with up to the first 5 characters of their last name", () => {
+      const student = Student.create("Khalil", "Stemmler");
+      expect(student.getEmail()).toBe("stemmkh@essentialist.dev");
+
+      const anotherStudent = Student.create("Maxwell", "Po");
+      expect(anotherStudent.getEmail()).toBe("poma@essentialist.dev");
+    });
   });
 });

@@ -33,8 +33,12 @@ export class Student {
 
   private setUpEmail(firstName: string, lastName: string) {
     const firstTwoCharOfFirstName = firstName.slice(0, 2).toLowerCase();
+    const first5CharOfLastName =
+      lastName.length < 5
+        ? lastName.toLowerCase()
+        : lastName.slice(0, 5).toLowerCase();
 
-    return `${lastName.toLowerCase()}${firstTwoCharOfFirstName}@essentialist.dev`;
+    return `${first5CharOfLastName}${firstTwoCharOfFirstName}@essentialist.dev`;
   }
 
   private static validateFirstName(firstName: string | null): string {
