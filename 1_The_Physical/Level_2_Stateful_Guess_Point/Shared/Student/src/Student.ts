@@ -33,6 +33,10 @@ export class Student {
       throw new Error("Your first name must have at least 2 characters");
     }
 
+    if (firstName.length > 10) {
+      throw new Error("Your first name must have at most 10 characters");
+    }
+
     return firstName;
   }
 }
