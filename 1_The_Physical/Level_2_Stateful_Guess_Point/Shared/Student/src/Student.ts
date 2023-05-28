@@ -46,6 +46,10 @@ export class Student {
       throw new Error("Your last name must have at least 2 characters");
     }
 
+    if (lastName.length > 15) {
+      throw new Error("Your last name must have at most 15 characters");
+    }
+
     return lastName;
   }
 }

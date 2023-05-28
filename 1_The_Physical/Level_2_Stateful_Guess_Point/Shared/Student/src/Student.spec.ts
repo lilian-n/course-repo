@@ -29,5 +29,9 @@ describe("Student", () => {
     it("fails to be created when the last name is only 1 character", () => {
       expect(() => Student.create("Betty", "B")).toThrowError();
     });
+
+    it("fails to be created when the last name is over 15 characters", () => {
+      expect(() => Student.create("Betty", "Booppppppppppppp")).toThrowError();
+    });
   });
 });
