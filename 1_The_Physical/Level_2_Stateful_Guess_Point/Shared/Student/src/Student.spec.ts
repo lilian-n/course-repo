@@ -25,5 +25,9 @@ describe("Student", () => {
     it("fails to be created when not given a last name", () => {
       expect(() => Student.create("Betty", null)).toThrowError();
     });
+
+    it("fails to be created when the last name is only 1 character", () => {
+      expect(() => Student.create("Betty", "B")).toThrowError();
+    });
   });
 });

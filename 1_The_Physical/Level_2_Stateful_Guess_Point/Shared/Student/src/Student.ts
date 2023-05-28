@@ -12,12 +12,9 @@ export class Student {
     lastName: string | null
   ): Student {
     const validatedFirstName = this.validateFirstName(firstName);
+    const validatedLastName = this.validateLastName(lastName);
 
-    if (!lastName) {
-      throw new Error("You must give a last name");
-    }
-
-    return new Student(validatedFirstName, lastName);
+    return new Student(validatedFirstName, validatedLastName);
   }
 
   public getFirstName() {
@@ -38,5 +35,17 @@ export class Student {
     }
 
     return firstName;
+  }
+
+  private static validateLastName(lastName: string | null): string {
+    if (!lastName) {
+      throw new Error("You must give a last name");
+    }
+
+    if (lastName.length < 2) {
+      throw new Error("Your last name must have at least 2 characters");
+    }
+
+    return lastName;
   }
 }
