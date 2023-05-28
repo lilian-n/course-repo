@@ -40,4 +40,12 @@ describe("Student", () => {
       expect(student.getLastName()).toBe("Boop");
     });
   });
+
+  describe("when automatically generating a student email", () => {
+    it("should have a student email defined", () => {
+      const student = Student.create("Betty", "Boop");
+
+      expect(student.getEmail()).toBeDefined();
+    });
+  });
 });

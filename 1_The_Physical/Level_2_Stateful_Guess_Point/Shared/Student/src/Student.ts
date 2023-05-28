@@ -1,10 +1,12 @@
 export class Student {
   private firstName;
   private lastName;
+  private email;
 
   private constructor(firstName: string, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.email = this.setUpEmail(firstName, lastName);
   }
 
   public static create(
@@ -23,6 +25,14 @@ export class Student {
 
   public getLastName() {
     return this.lastName;
+  }
+
+  public getEmail() {
+    return this.email;
+  }
+
+  private setUpEmail(firstName: string, lastName: string) {
+    return `${lastName}${firstName}@essentialist.dev`;
   }
 
   private static validateFirstName(firstName: string | null): string {
