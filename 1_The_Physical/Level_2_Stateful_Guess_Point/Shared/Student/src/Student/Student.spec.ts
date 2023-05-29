@@ -3,63 +3,124 @@ import { Student } from "./Student";
 describe("Student", () => {
   describe("when defining a first name", () => {
     it("fails to be created when not given a first name", () => {
-      expect(() => Student.create(null, "Boop")).toThrowError();
+      const studentResult = Student.create(null, "Boop");
+      expect(studentResult.isSuccess).toBeFalsy();
+
+      if (studentResult.isFailure) {
+        expect(studentResult.error).toBe("You must give a first name");
+      }
     });
 
     it("fails to be created when the first name is only 1 character", () => {
-      expect(() => Student.create("B", "Boop")).toThrowError();
+      const studentResult = Student.create("B", "Boop");
+      expect(studentResult.isSuccess).toBeFalsy();
+
+      if (studentResult.isFailure) {
+        expect(studentResult.error).toBe(
+          "Your first name must have at least 2 characters"
+        );
+      }
     });
 
     it("fails to be created when the first name is over 10 characters", () => {
-      expect(() => Student.create("Bettyyyyyyy", "Boop")).toThrowError();
+      const studentResult = Student.create("Bettyyyyyyy", "Boop");
+      expect(studentResult.isSuccess).toBeFalsy();
+
+      if (studentResult.isFailure) {
+        expect(studentResult.error).toBe(
+          "Your first name must have at most 10 characters"
+        );
+      }
     });
 
     it("succeeds in being created when the first name is 5 characters, between 2 and 10 characters", () => {
-      const student = Student.create("Betty", "Boop");
+      const studentResult = Student.create("Betty", "Boop");
 
-      expect(student.getFirstName()).toBe("Betty");
+      expect(studentResult.isSuccess).toBeTruthy();
+
+      if (studentResult.isSuccess) {
+        expect(studentResult.value.getFirstName()).toBe("Betty");
+      }
     });
   });
 
   describe("when defining a last name", () => {
     it("fails to be created when not given a last name", () => {
-      expect(() => Student.create("Betty", null)).toThrowError();
+      const studentResult = Student.create("Betty", null);
+      expect(studentResult.isSuccess).toBeFalsy();
+
+      if (studentResult.isFailure) {
+        expect(studentResult.error).toBe("You must give a last name");
+      }
     });
 
     it("fails to be created when the last name is only 1 character", () => {
-      expect(() => Student.create("Betty", "B")).toThrowError();
+      const studentResult = Student.create("Betty", "B");
+      expect(studentResult.isSuccess).toBeFalsy();
+
+      if (studentResult.isFailure) {
+        expect(studentResult.error).toBe(
+          "Your last name must have at least 2 characters"
+        );
+      }
     });
 
     it("fails to be created when the last name is over 15 characters", () => {
-      expect(() => Student.create("Betty", "Booppppppppppppp")).toThrowError();
+      const studentResult = Student.create("Betty", "Booppppppppppppp");
+      expect(studentResult.isSuccess).toBeFalsy();
+
+      if (studentResult.isFailure) {
+        expect(studentResult.error).toBe(
+          "Your last name must have at most 15 characters"
+        );
+      }
     });
 
     it("succeeds in being created when the last name is 4 characters, between 2 - 15 characters", () => {
-      const student = Student.create("Betty", "Boop");
+      const studentResult = Student.create("Betty", "Boop");
+      expect(studentResult.isSuccess).toBeTruthy();
 
-      expect(student.getLastName()).toBe("Boop");
+      if (studentResult.isSuccess) {
+        expect(studentResult.value.getLastName()).toBe("Boop");
+      }
     });
   });
 
   describe("when automatically generating a student email, should define in the following format: up to 5 characters of their last name + 2 characters of their first name + @essentialist.dev", () => {
     it("should have a student email defined", () => {
-      const student = Student.create("Betty", "Boop");
-      expect(student.getEmail()).toBeDefined();
+      const studentResult = Student.create("Betty", "Boop");
+      expect(studentResult.isSuccess).toBeTruthy();
+
+      if (studentResult.isSuccess) {
+        expect(studentResult.value.getEmail()).toBeDefined();
+      }
     });
 
     it("given the name 'Betty Boop', should create 'boopbe@essentialist.dev' ", () => {
-      const student = Student.create("Betty", "Boop");
-      expect(student.getEmail()).toBe("boopbe@essentialist.dev");
+      const studentResult = Student.create("Betty", "Boop");
+      expect(studentResult.isSuccess).toBeTruthy();
+
+      if (studentResult.isSuccess) {
+        expect(studentResult.value.getEmail()).toBe("boopbe@essentialist.dev");
+      }
     });
 
     it("given the name 'Khalil Stemmler', should create 'stemmkh@essentialist.dev' ", () => {
-      const student = Student.create("Khalil", "Stemmler");
-      expect(student.getEmail()).toBe("stemmkh@essentialist.dev");
+      const studentResult = Student.create("Khalil", "Stemmler");
+      expect(studentResult.isSuccess).toBeTruthy();
+
+      if (studentResult.isSuccess) {
+        expect(studentResult.value.getEmail()).toBe("stemmkh@essentialist.dev");
+      }
     });
 
     it("given the name 'Maxwell Po', should create 'poma@essentialist.dev'", () => {
-      const anotherStudent = Student.create("Maxwell", "Po");
-      expect(anotherStudent.getEmail()).toBe("poma@essentialist.dev");
+      const studentResult = Student.create("Maxwell", "Po");
+      expect(studentResult.isSuccess).toBeTruthy();
+
+      if (studentResult.isSuccess) {
+        expect(studentResult.value.getEmail()).toBe("poma@essentialist.dev");
+      }
     });
   });
 });
