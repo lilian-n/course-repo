@@ -125,22 +125,29 @@ describe("Student", () => {
   });
 
   describe("when updating a first name", () => {
+    const studentResult = Student.create("Betty", "Boop");
+    expect(studentResult.isSuccess).toBeTruthy();
+
+    if (studentResult.isFailure) {
+      return;
+    }
+
+    const student = studentResult.value;
+
     it("changes the student's name from 'Betty' to 'Betsy'", () => {
-      const studentResult = Student.create("Betty", "Boop");
-      expect(studentResult.isSuccess).toBeTruthy();
-
-      if (studentResult.isFailure) {
-        return;
-      }
-
-      const student = studentResult.value;
       const updatedStudent = student.updateFirstName("Betsy");
       expect(updatedStudent.isSuccess).toBeTruthy();
 
       if (updatedStudent.isFailure) {
         return;
       }
+
       expect(updatedStudent.value.getFirstName()).toBe("Betsy");
+    });
+
+    it("fails to update if a first name is not given", () => {
+      const updatedStudent = student.updateFirstName(null);
+      expect(updatedStudent.isSuccess).toBeFalsy();
     });
   });
 });
