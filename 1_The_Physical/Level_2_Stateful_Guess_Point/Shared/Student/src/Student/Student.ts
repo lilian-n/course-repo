@@ -155,4 +155,8 @@ export class Student {
   public updateFirstName(firstName: string | null): Result<Student> {
     return Student.create(firstName, this.lastName);
   }
+
+  public updateLastName(lastName: string | null): Result<Student> {
+    return Student.create(this.firstName, lastName);
+  }
 }

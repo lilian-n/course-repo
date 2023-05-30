@@ -150,4 +150,26 @@ describe("Student", () => {
       expect(updatedStudent.isSuccess).toBeFalsy();
     });
   });
+
+  describe("when updating a last name", () => {
+    const studentResult = Student.create("Betty", "Boop");
+    expect(studentResult.isSuccess).toBeTruthy();
+
+    if (studentResult.isFailure) {
+      return;
+    }
+
+    const student = studentResult.value;
+
+    it("changes the student's last name from 'Boop' to 'Snoop'", () => {
+      const updatedStudent = student.updateLastName("Snoop");
+      expect(updatedStudent.isSuccess).toBeTruthy();
+
+      if (updatedStudent.isFailure) {
+        return;
+      }
+
+      expect(updatedStudent.value.getLastName()).toBe("Snoop");
+    });
+  });
 });
