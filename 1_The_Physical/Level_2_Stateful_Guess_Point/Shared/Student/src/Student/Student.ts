@@ -15,8 +15,8 @@ export type Failure = {
 };
 
 export class Student {
-  private firstName;
-  private lastName;
+  private readonly firstName;
+  private readonly lastName;
   private email;
 
   private constructor(firstName: string, lastName: string) {
@@ -150,5 +150,9 @@ export class Student {
       isSuccess: true,
       isFailure: false,
     };
+  }
+
+  public updateFirstName(firstName: string | null): Result<Student> {
+    return Student.create(firstName, this.lastName);
   }
 }

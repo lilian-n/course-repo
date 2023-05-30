@@ -123,4 +123,24 @@ describe("Student", () => {
       }
     });
   });
+
+  describe("when updating a first name", () => {
+    it("changes the student's name from 'Betty' to 'Betsy'", () => {
+      const studentResult = Student.create("Betty", "Boop");
+      expect(studentResult.isSuccess).toBeTruthy();
+
+      if (studentResult.isFailure) {
+        return;
+      }
+
+      const student = studentResult.value;
+      const updatedStudent = student.updateFirstName("Betsy");
+      expect(updatedStudent.isSuccess).toBeTruthy();
+
+      if (updatedStudent.isFailure) {
+        return;
+      }
+      expect(updatedStudent.value.getFirstName()).toBe("Betsy");
+    });
+  });
 });
