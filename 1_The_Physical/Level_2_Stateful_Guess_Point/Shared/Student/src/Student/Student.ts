@@ -1,4 +1,5 @@
 import { FirstName } from "../FirstName/FirstName";
+import { LastName } from "../LastName/LastName";
 
 export type Result<T> = Success<T> | Failure;
 
@@ -21,10 +22,10 @@ export class Student {
   private readonly lastName;
   private email;
 
-  private constructor(firstName: FirstName, lastName: string) {
+  private constructor(firstName: FirstName, lastName: LastName) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = this.setUpEmail(firstName.getValue(), lastName);
+    this.email = this.setUpEmail(firstName.getValue(), lastName.getValue());
   }
 
   public static create(
@@ -32,7 +33,7 @@ export class Student {
     lastName: string | null
   ): Result<Student> {
     const firstNameOrError = FirstName.create(firstName);
-    const validatedLastName = this.validateLastName(lastName);
+    const lastNameOrError = LastName.create(lastName);
 
     if (firstNameOrError.isFailure) {
       return {
@@ -43,10 +44,10 @@ export class Student {
       };
     }
 
-    if (validatedLastName.isFailure) {
+    if (lastNameOrError.isFailure) {
       return {
         type: "failure",
-        error: validatedLastName.error,
+        error: lastNameOrError.error,
         isSuccess: false,
         isFailure: true,
       };
@@ -54,7 +55,7 @@ export class Student {
 
     return {
       type: "success",
-      value: new Student(firstNameOrError.value, validatedLastName.value),
+      value: new Student(firstNameOrError.value, lastNameOrError.value),
       isSuccess: true,
       isFailure: false,
     };
@@ -65,7 +66,7 @@ export class Student {
   }
 
   public getLastName() {
-    return this.lastName;
+    return this.lastName.getValue();
   }
 
   public getEmail() {
@@ -82,44 +83,8 @@ export class Student {
     return `${first5CharOfLastName}${firstTwoCharOfFirstName}@essentialist.dev`;
   }
 
-  private static validateLastName(lastName: string | null): Result<string> {
-    if (!lastName) {
-      return {
-        type: "failure",
-        error: "You must give a last name",
-        isSuccess: false,
-        isFailure: true,
-      };
-    }
-
-    if (lastName.length < 2) {
-      return {
-        type: "failure",
-        error: "Your last name must have at least 2 characters",
-        isSuccess: false,
-        isFailure: true,
-      };
-    }
-
-    if (lastName.length > 10) {
-      return {
-        type: "failure",
-        error: "Your last name must have at most 15 characters",
-        isSuccess: false,
-        isFailure: true,
-      };
-    }
-
-    return {
-      type: "success",
-      value: lastName,
-      isSuccess: true,
-      isFailure: false,
-    };
-  }
-
   public updateFirstName(firstName: string | null): Result<Student> {
-    return Student.create(firstName, this.lastName);
+    return Student.create(firstName, this.lastName.getValue());
   }
 
   public updateLastName(lastName: string | null): Result<Student> {

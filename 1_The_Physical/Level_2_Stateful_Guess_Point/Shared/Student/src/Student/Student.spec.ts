@@ -1,48 +1,6 @@
 import { Student } from "./Student";
 
 describe("Student", () => {
-  describe("when defining a last name", () => {
-    it("fails to be created when not given a last name", () => {
-      const studentResult = Student.create("Betty", null);
-      expect(studentResult.isSuccess).toBeFalsy();
-
-      if (studentResult.isFailure) {
-        expect(studentResult.error).toBe("You must give a last name");
-      }
-    });
-
-    it("fails to be created when the last name is only 1 character", () => {
-      const studentResult = Student.create("Betty", "B");
-      expect(studentResult.isSuccess).toBeFalsy();
-
-      if (studentResult.isFailure) {
-        expect(studentResult.error).toBe(
-          "Your last name must have at least 2 characters"
-        );
-      }
-    });
-
-    it("fails to be created when the last name is over 15 characters", () => {
-      const studentResult = Student.create("Betty", "Booppppppppppppp");
-      expect(studentResult.isSuccess).toBeFalsy();
-
-      if (studentResult.isFailure) {
-        expect(studentResult.error).toBe(
-          "Your last name must have at most 15 characters"
-        );
-      }
-    });
-
-    it("succeeds in being created when the last name is 4 characters, between 2 - 15 characters", () => {
-      const studentResult = Student.create("Betty", "Boop");
-      expect(studentResult.isSuccess).toBeTruthy();
-
-      if (studentResult.isSuccess) {
-        expect(studentResult.value.getLastName()).toBe("Boop");
-      }
-    });
-  });
-
   describe("when automatically generating a student email, should define in the following format: up to 5 characters of their last name + 2 characters of their first name + @essentialist.dev", () => {
     it("should have a student email defined", () => {
       const studentResult = Student.create("Betty", "Boop");
