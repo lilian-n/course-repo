@@ -171,5 +171,10 @@ describe("Student", () => {
 
       expect(updatedStudent.value.getLastName()).toBe("Snoop");
     });
+
+    it("fails to update if a last name is not given", () => {
+      const updatedStudent = student.updateLastName(null);
+      expect(updatedStudent.isSuccess).toBeFalsy();
+    });
   });
 });
