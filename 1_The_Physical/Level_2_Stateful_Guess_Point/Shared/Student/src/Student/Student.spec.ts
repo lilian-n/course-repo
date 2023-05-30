@@ -145,6 +145,17 @@ describe("Student", () => {
       expect(updatedStudent.value.getFirstName()).toBe("Betsy");
     });
 
+    it("the student's email changes to reflect the updated first name", () => {
+      const updatedStudent = student.updateFirstName("Betsy");
+      expect(updatedStudent.isSuccess).toBeTruthy();
+
+      if (updatedStudent.isFailure) {
+        return;
+      }
+
+      expect(updatedStudent.value.getEmail()).toBe("boopbe@essentialist.dev");
+    });
+
     it("fails to update if a first name is not given", () => {
       const updatedStudent = student.updateFirstName(null);
       expect(updatedStudent.isSuccess).toBeFalsy();
@@ -170,6 +181,17 @@ describe("Student", () => {
       }
 
       expect(updatedStudent.value.getLastName()).toBe("Snoop");
+    });
+
+    it("the student's email changes to reflect the updated last name", () => {
+      const updatedStudent = student.updateLastName("Snoop");
+      expect(updatedStudent.isSuccess).toBeTruthy();
+
+      if (updatedStudent.isFailure) {
+        return;
+      }
+
+      expect(updatedStudent.value.getEmail()).toBe("snoopbe@essentialist.dev");
     });
 
     it("fails to update if a last name is not given", () => {
