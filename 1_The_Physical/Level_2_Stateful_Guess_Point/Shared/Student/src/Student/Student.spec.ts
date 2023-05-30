@@ -1,49 +1,6 @@
 import { Student } from "./Student";
 
 describe("Student", () => {
-  describe("when defining a first name", () => {
-    it("fails to be created when not given a first name", () => {
-      const studentResult = Student.create(null, "Boop");
-      expect(studentResult.isSuccess).toBeFalsy();
-
-      if (studentResult.isFailure) {
-        expect(studentResult.error).toBe("You must give a first name");
-      }
-    });
-
-    it("fails to be created when the first name is only 1 character", () => {
-      const studentResult = Student.create("B", "Boop");
-      expect(studentResult.isSuccess).toBeFalsy();
-
-      if (studentResult.isFailure) {
-        expect(studentResult.error).toBe(
-          "Your first name must have at least 2 characters"
-        );
-      }
-    });
-
-    it("fails to be created when the first name is over 10 characters", () => {
-      const studentResult = Student.create("Bettyyyyyyy", "Boop");
-      expect(studentResult.isSuccess).toBeFalsy();
-
-      if (studentResult.isFailure) {
-        expect(studentResult.error).toBe(
-          "Your first name must have at most 10 characters"
-        );
-      }
-    });
-
-    it("succeeds in being created when the first name is 5 characters, between 2 and 10 characters", () => {
-      const studentResult = Student.create("Betty", "Boop");
-
-      expect(studentResult.isSuccess).toBeTruthy();
-
-      if (studentResult.isSuccess) {
-        expect(studentResult.value.getFirstName()).toBe("Betty");
-      }
-    });
-  });
-
   describe("when defining a last name", () => {
     it("fails to be created when not given a last name", () => {
       const studentResult = Student.create("Betty", null);

@@ -1,3 +1,5 @@
+import { FirstName } from "../FirstName/FirstName";
+
 export type Result<T> = Success<T> | Failure;
 
 export type Success<T> = {
@@ -19,23 +21,23 @@ export class Student {
   private readonly lastName;
   private email;
 
-  private constructor(firstName: string, lastName: string) {
+  private constructor(firstName: FirstName, lastName: string) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = this.setUpEmail(firstName, lastName);
+    this.email = this.setUpEmail(firstName.getValue(), lastName);
   }
 
   public static create(
     firstName: string | null,
     lastName: string | null
   ): Result<Student> {
-    const validatedFirstName = this.validateFirstName(firstName);
+    const firstNameOrError = FirstName.create(firstName);
     const validatedLastName = this.validateLastName(lastName);
 
-    if (validatedFirstName.isFailure) {
+    if (firstNameOrError.isFailure) {
       return {
         type: "failure",
-        error: validatedFirstName.error,
+        error: firstNameOrError.error,
         isSuccess: false,
         isFailure: true,
       };
@@ -52,14 +54,14 @@ export class Student {
 
     return {
       type: "success",
-      value: new Student(validatedFirstName.value, validatedLastName.value),
+      value: new Student(firstNameOrError.value, validatedLastName.value),
       isSuccess: true,
       isFailure: false,
     };
   }
 
   public getFirstName() {
-    return this.firstName;
+    return this.firstName.getValue();
   }
 
   public getLastName() {
@@ -78,42 +80,6 @@ export class Student {
         : lastName.slice(0, 5).toLowerCase();
 
     return `${first5CharOfLastName}${firstTwoCharOfFirstName}@essentialist.dev`;
-  }
-
-  private static validateFirstName(firstName: string | null): Result<string> {
-    if (!firstName) {
-      return {
-        type: "failure",
-        error: "You must give a first name",
-        isSuccess: false,
-        isFailure: true,
-      };
-    }
-
-    if (firstName.length < 2) {
-      return {
-        type: "failure",
-        error: "Your first name must have at least 2 characters",
-        isSuccess: false,
-        isFailure: true,
-      };
-    }
-
-    if (firstName.length > 10) {
-      return {
-        type: "failure",
-        error: "Your first name must have at most 10 characters",
-        isSuccess: false,
-        isFailure: true,
-      };
-    }
-
-    return {
-      type: "success",
-      value: firstName,
-      isSuccess: true,
-      isFailure: false,
-    };
   }
 
   private static validateLastName(lastName: string | null): Result<string> {
@@ -157,6 +123,6 @@ export class Student {
   }
 
   public updateLastName(lastName: string | null): Result<Student> {
-    return Student.create(this.firstName, lastName);
+    return Student.create(this.firstName.getValue(), lastName);
   }
 }
