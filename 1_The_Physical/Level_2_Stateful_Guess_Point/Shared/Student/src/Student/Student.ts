@@ -1,5 +1,6 @@
 import { FirstName } from "../FirstName/FirstName";
 import { LastName } from "../LastName/LastName";
+import { StudentEmail } from "../StudentEmail/StudentEmail";
 
 export type Result<T> = Success<T> | Failure;
 
@@ -18,14 +19,14 @@ export type Failure = {
 };
 
 export class Student {
-  private readonly firstName;
-  private readonly lastName;
-  private email;
+  private readonly firstName: FirstName;
+  private readonly lastName: LastName;
+  private readonly email: StudentEmail;
 
   private constructor(firstName: FirstName, lastName: LastName) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.email = this.setUpEmail(firstName.getValue(), lastName.getValue());
+    this.email = StudentEmail.create(firstName.getValue(), lastName.getValue());
   }
 
   public static create(
@@ -70,17 +71,7 @@ export class Student {
   }
 
   public getEmail() {
-    return this.email;
-  }
-
-  private setUpEmail(firstName: string, lastName: string) {
-    const firstTwoCharOfFirstName = firstName.slice(0, 2).toLowerCase();
-    const first5CharOfLastName =
-      lastName.length < 5
-        ? lastName.toLowerCase()
-        : lastName.slice(0, 5).toLowerCase();
-
-    return `${first5CharOfLastName}${firstTwoCharOfFirstName}@essentialist.dev`;
+    return this.email.getValue();
   }
 
   public updateFirstName(firstName: string | null): Result<Student> {

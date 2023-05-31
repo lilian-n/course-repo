@@ -11,24 +11,6 @@ describe("Student", () => {
       }
     });
 
-    it("given the name 'Betty Boop', should create 'boopbe@essentialist.dev' ", () => {
-      const studentResult = Student.create("Betty", "Boop");
-      expect(studentResult.isSuccess).toBeTruthy();
-
-      if (studentResult.isSuccess) {
-        expect(studentResult.value.getEmail()).toBe("boopbe@essentialist.dev");
-      }
-    });
-
-    it("given the name 'Khalil Stemmler', should create 'stemmkh@essentialist.dev' ", () => {
-      const studentResult = Student.create("Khalil", "Stemmler");
-      expect(studentResult.isSuccess).toBeTruthy();
-
-      if (studentResult.isSuccess) {
-        expect(studentResult.value.getEmail()).toBe("stemmkh@essentialist.dev");
-      }
-    });
-
     it("given the name 'Maxwell Po', should create 'poma@essentialist.dev'", () => {
       const studentResult = Student.create("Maxwell", "Po");
       expect(studentResult.isSuccess).toBeTruthy();
